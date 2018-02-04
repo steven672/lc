@@ -1,0 +1,36 @@
+Solutions:
+class Solution(object):
+    def canPlaceFlowers(self, flowerbed, n):
+        """
+        :type flowerbed: List[int]
+        :type n: int
+        :rtype: bool
+        """
+        ## image the buckets, then insert n to the slots,£º£º how many ways to insert inside.
+        ## count 0 numbers
+        count = 0
+        con = 0
+        start = 1 if flowerbed[0] == 0 else 0 
+        if len(flowerbed) == 1 and flowerbed[0] ==0:
+            return True
+        
+        for i in range(len(flowerbed)):
+            if flowerbed[i] == 0:
+                con +=1
+                if i == len(flowerbed) -1 :
+                    if start ==1:
+                        count += (con+1)//2
+                    else:
+                        count += (con)//2
+                    con =0
+            else:
+                if con ==0:
+                    continue
+                if start ==1 :
+                    count += (con)//2
+                    start =0
+                else:
+                    count += (con-1)//2
+                con =0
+        print count
+        return count >= n
